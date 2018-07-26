@@ -5,6 +5,7 @@ help:
 	@echo "upstream 	set upstream to https://github.com/ThreatConnect-Inc/threatconnect-developer-docs.git (useful when working on a fork of the TC docs)"
 	@echo "doctest 	run sphinx on the documentation to view errors"
 
+today := $(shell date +"%B %d, %Y")
 uptcex:
 	# This script is to be run in the top directory of the TC Documentation (available here: https://github.com/ThreatConnect-Inc/threatconnect-developer-docs)
 
@@ -34,6 +35,15 @@ uptcex:
 	mv ./tcex/tcex/* ./tcex;
 	# remove the empty directory
 	rm -rf ./tcex/tcex;
+
+	# change the variable name of the tcex version used in the tcex docs
+	sed -i.bak 's/|version|/|tcex_version|/g' ./docs/tcex/tcex.rst && rm ./docs/tcex/tcex.rst.bak;
+
+	# stage all changes (including deletions)
+	git add -A;
+
+	# commit
+	git commit -m "Auto-update TCEX docs: $(today)";
 
 clean:
 	# This script is to be run in the top directory of the TC Documentation (available here: https://github.com/ThreatConnect-Inc/threatconnect-developer-docs)

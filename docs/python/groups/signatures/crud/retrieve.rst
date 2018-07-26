@@ -7,7 +7,7 @@ Retrieving a Single Signature
 This example demonstrates how to retrieve a specific Signature using the Signature's ID. The ``add_id`` filter specifies the ID of the Signature which you would like to retrieve.
 
 .. code-block:: python
-   :emphasize-lines: 10-12,15-16
+    :emphasize-lines: 10-12,15-16
 
     # replace the line below with the standard, TC script heading described here:
     # https://docs.threatconnect.com/en/latest/python/quick_start.html#standard-script-heading
@@ -38,6 +38,8 @@ This example demonstrates how to retrieve a specific Signature using the Signatu
 
         # Signature specific property
         print(signature.type)
+
+        print('')
 
 Downloading a Signature's Content
 +++++++++++++++++++++++++++++++++
@@ -77,10 +79,10 @@ of **EXAMPLE**.
 
     owner = 'Example Community'
 
-    # set a filter to only retrieve Signatures in the 'Example Community' tagged: 'APT'
+    # set a filter to only retrieve Signatures in the 'Example Community' tagged: 'Nation State'
     filter1 = signatures.add_filter()
     filter1.add_owner(owner)
-    filter1.add_tag('APT')
+    filter1.add_tag('Nation State')
 
     try:
         # retrieve the Signatures
@@ -95,5 +97,6 @@ of **EXAMPLE**.
         print(signature.name)
         print(signature.date_added)
         print(signature.weblink)
+        print('')
 
 .. note:: The ``filter1`` object contains a ``filters`` property that provides a list of supported filters for the resource type being retrieved. To display this list, ``print(filter1.filters)`` can be used. For more on using filters see the `Advanced Filter Tutorial <https://docs.threatconnect.com/en/latest/python/advanced.html#advanced-filtering>`__.

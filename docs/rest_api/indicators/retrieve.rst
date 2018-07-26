@@ -27,7 +27,7 @@ JSON Response:
             "parsable": "true",
             "apiBranch": "addresses",
             "apiEntity": "address"
-          },``
+          },
           {
             "name": "EmailAddress",
             "custom": "false",
@@ -318,7 +318,7 @@ JSON Response:
             "lastModified": "2017-07-19T17:35:31Z",
             "threatAssessRating": 3,
             "threatAssessConfidence": 50,
-            "webLink": "https://app.threatconnect.com/auth/indicators/details/url.xhtml?orgid=54321&owner=Research+Labs",
+            "webLink": "https://app.threatconnect.com/auth/indicators/details/url.xhtml?orgid=54321&owner=Example+Organization",
             "summary": "http://example.com/login.php"
           },
           {
@@ -329,7 +329,7 @@ JSON Response:
             "lastModified": "2017-07-19T17:35:29Z",
             "threatAssessRating": 4,
             "threatAssessConfidence": 75,
-            "webLink": "https://app.threatconnect.com/auth/indicators/details/emailaddress.xhtml?emailaddress=bad%40gmail.com&owner=Research+Labs",
+            "webLink": "https://app.threatconnect.com/auth/indicators/details/emailaddress.xhtml?emailaddress=bad%40gmail.com&owner=Example+Organization",
             "summary": "bad@gmail.com"
           }
         ]
@@ -371,7 +371,7 @@ JSON Response:
             "lastModified": "2017-07-19T17:53:50Z",
             "threatAssessRating": 3,
             "threatAssessConfidence": 50,
-            "webLink": "https://app.threatconnect.com/auth/indicators/details/emailaddress.xhtml?emailaddress=phish%40example.com&owner=Research+Labs",
+            "webLink": "https://app.threatconnect.com/auth/indicators/details/emailaddress.xhtml?emailaddress=phish%40example.com&owner=Example+Organization",
             "address": "phish@example.com"
           },
           {
@@ -381,7 +381,7 @@ JSON Response:
             "lastModified": "2017-07-19T17:53:49Z",
             "threatAssessRating": 3,
             "threatAssessConfidence": 50,
-            "webLink": "https://app.threatconnect.com/auth/indicators/details/emailaddress.xhtml?emailaddress=bad%40gmail.com&owner=Research+Labs",
+            "webLink": "https://app.threatconnect.com/auth/indicators/details/emailaddress.xhtml?emailaddress=bad%40gmail.com&owner=Example+Organization",
             "address": "bad@gmail.com"
           }
         ]
@@ -570,7 +570,7 @@ Retrieve Indicator Observations
 Retrieving Recent Observations
 """"""""""""""""""""""""""""""
 
-As of ThreatConnect 5.0, the API branch below provides the ten Indicators with the most observations since a given date. If no date is given, the default query returns the ten Indicators which have had the most observations over the past day. In this context, a “day” includes all of the previous day and all data from the current day up to the current moment in time.
+As of ThreatConnect 5.0, the API branch below provides the ten Indicators with the most observations since a given date. If no date is given, the default query returns the ten Indicators which have had the most observations over the past day. In this context, a "day" includes all of the previous day and all data from the current day up to the current moment in time.
 
 .. code::
 
@@ -613,7 +613,7 @@ This request will return the following data:
       }
     }
 
-.. note:: Only observations reported using API accounts that are configured to be included in Observations and False Positives will show up in the list of recent observations. For more details on how to configure an API account in this way, refer to the knowledge base article `here <http://kb.threatconnect.com/customer/en/portal/articles/2324809-reporting-false-positives>`_.
+.. note:: Only observations reported using API accounts that are configured to be included in Observations and False Positives will show up in the list of recent observations. For more details on how to configure an API account in this way, refer to the knowledge base article `here <http://kb.threatconnect.com/customer/en/portal/articles/2324809-reporting-false-positives>`__.
 
 Retrieving Total Indicator Observations
 """""""""""""""""""""""""""""""""""""""
@@ -942,6 +942,8 @@ For example, we could use the following query to find all Address Indicators ass
 .. code::
 
     GET /v2/indicators/emailAddresses/bad@example.com/indicators/addresses
+
+.. note:: There is more documentation on retrieving Indicator-to-Indicator associations `here <#indicator-to-indicator-associations>`__.
 
 Victim Assets to Indicator Associations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

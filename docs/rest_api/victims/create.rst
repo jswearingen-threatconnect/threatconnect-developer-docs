@@ -235,6 +235,8 @@ JSON Response:
       "status": "Success"
     }
 
+.. include:: ../_includes/tag_length.rst
+
 Create Victim Associations
 --------------------------
 
@@ -256,52 +258,6 @@ For example, the query below will associate a Victim with ID 12345 with an Incid
 .. code::
 
     POST /v2/victims/12345/groups/incidents/54321
-
-JSON Response:
-
-.. code:: json
-
-    {
-      "status": "Success"
-    }
-
-Associate Indicator to Victim
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To associate a Victim with an Indicator, use a query in the following format:
-
-.. code::
-
-    POST /v2/victims/{victimId}/indicators/{associatedIndicatorType}/{associatedIndicator}
-
-For example, the query below will associate the Victim with ID 12345 with the IP Address ``0.0.0.0``:
-
-.. code::
-
-    POST /v2/victims/12345/indicators/addresses/0.0.0.0
-
-JSON Response:
-
-.. code:: json
-
-    {
-      "status": "Success"
-    }
-
-Associate Victim to Victim
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To associate one Victim with another, use a query in the following format:
-
-.. code::
-
-    POST /v2/victims/{victimId}/victims/{victimId}
-
-For example, the query below will associate the Victim with ID 12345 to the Victim with ID 54321:
-
-.. code::
-
-    POST /v2/victims/12345/victims/54321
 
 JSON Response:
 

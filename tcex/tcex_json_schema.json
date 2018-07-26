@@ -4,11 +4,17 @@
     "allowOnDemand": {
       "type": "boolean"
     },
+    "allowRunAsUser": {
+      "type": "boolean"
+    },
     "apiUserTokenParam": {
       "type": "boolean"
     },
     "displayName": {
       "type": "string"
+    },
+    "features": {
+      "type": "array"
     },
     "feeds": {
       "items": {
@@ -69,6 +75,15 @@
           },
           "encrypt": {
             "type": "boolean"
+          },
+          "exposePlaybookKeyAs": {
+            "items": {
+              "enum": [
+                "String",
+                "StringArray"
+              ]
+            },
+            "type": "string"
           },
           "hidden": {
             "type": "boolean"
@@ -162,7 +177,7 @@
             "type": "object"
           },
           "type": "array",
-          "uniqueItems": true
+          "uniqueItems": false
         },
         "retry": {
           "additionalProperties": false,

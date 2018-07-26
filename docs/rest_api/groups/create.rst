@@ -169,7 +169,7 @@ For example, the query below will add a ``TLP Amber`` Security Label to the Thre
 JSON Response:
 
 .. code:: json
-    
+
     {
       "apiCalls": 1,
       "resultCount": 0,
@@ -202,6 +202,8 @@ JSON Response:
       "resultCount": 0,
       "status": "Success"
     }
+
+.. include:: ../_includes/tag_length.rst
 
 Create Adversary Assets
 ^^^^^^^^^^^^^^^^^^^^^^^

@@ -1,8 +1,48 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """Find and test each of the links in the docs to make sure they are working properly."""
+
+import os
+import re
 import sys
 
 from bs4 import BeautifulSoup
 import requests
+
+base_url = 'https://docs.threatconnect.com/'
+pages = {
+    "https://docs.threatconnect.com/en/latest/rest_api/": [
+        'change_log.html',
+        'quick_start.html',
+        'overview.html',
+        'associations/associations.html',
+        'attributes/attributes.html',
+        'groups/groups.html',
+        'indicators/indicators.html',
+        'owners/owners.html',
+        'security_labels/security_labels.html',
+        'tags/tags.html',
+        'tasks/tasks.html',
+        'victims/victims.html',
+        'custom_metrics/custom_metrics.html'
+    ],
+    "https://docs.threatconnect.com/en/latest/python/": [
+        'python_sdk.html',
+        'quick_start.html',
+        'groups/groups.html',
+        'indicators/indicators.html',
+        'owners/owners.html',
+        'tasks/tasks.html',
+        'victims/victims.html',
+        'advanced.html'
+    ],
+    "https://docs.threatconnect.com/en/latest/javascript/": [
+        'javascript_sdk.html'
+    ],
+    "https://docs.threatconnect.com/en/latest/java/": [
+        'java_sdk.html'
+    ]
+}
 
 
 def _get_heading_ids(soup):
@@ -17,47 +57,11 @@ def _get_heading_ids(soup):
 def test_links():
     """."""
     bad_links = 0
-    base_url = 'https://docs.threatconnect.com/'
-    pages = {
-        "https://docs.threatconnect.com/en/latest/rest_api/": [
-            'change_log.html',
-            'quick_start.html',
-            'overview.html',
-            'associations/associations.html',
-            'attributes/attributes.html',
-            'groups/groups.html',
-            'indicators/indicators.html',
-            'owners/owners.html',
-            'security_labels/security_labels.html',
-            'tags/tags.html',
-            'tasks/tasks.html',
-            'victims/victims.html',
-            'custom_metrics/custom_metrics.html'
-        ],
-        "https://docs.threatconnect.com/en/latest/python/": [
-            'python_sdk.html',
-            'quick_start.html',
-            'groups/groups.html',
-            'indicators/indicators.html',
-            'owners/owners.html',
-            'tasks/tasks.html',
-            'victims/victims.html',
-            'advanced.html'
-        ],
-        "https://docs.threatconnect.com/en/latest/javascript/": [
-            'javascript_sdk.html'
-        ],
-        "https://docs.threatconnect.com/en/latest/java/": [
-            'java_sdk.html'
-        ]
-    }
     excluded_patterns = ["readthedocs.com"]
 
     for base_page, subpages in pages.items():
         for subpage in subpages:
             page = base_page + subpage
-
-            print("\n\n>>> Reviewing {}".format(page))
 
             # request page
             r = requests.get(page)
@@ -92,6 +96,7 @@ def test_links():
                     r = requests.get(href)
 
                     if not r.ok:
+                        print("\n\n>>> Reviewing {}".format(page))
                         print("{} error when requesting: {}".format(r.status_code, href))
                         bad_links += 1
                 # check links that are relative to the base url
@@ -100,6 +105,7 @@ def test_links():
                     r = requests.get(target_url)
 
                     if not r.ok:
+                        print("\n\n>>> Reviewing {}".format(page))
                         print("{} error when requesting: {}".format(r.status_code, target_url))
                         bad_links += 1
                 # check links to locations on the current page
@@ -108,6 +114,7 @@ def test_links():
                     if href == "#":
                         pass
                     elif href not in headings:
+                        print("\n\n>>> Reviewing {}".format(page))
                         print("Link to {} does not exist".format(href))
                         bad_links += 1
                 # check links that are relative to the current page
@@ -117,6 +124,7 @@ def test_links():
                     r = requests.get(target_url)
 
                     if str(r.status_code).startswith("4"):
+                        print("\n\n>>> Reviewing {}".format(page))
                         print("{} error when requesting: {}".format(r.status_code, target_url))
                         bad_links += 1
 
@@ -147,7 +155,6 @@ def test_standard_script_heading_link():
 
 def test_no_dev_links():
     """Make sure there are no links to the dev version of the docs."""
-    import os
     dev_pattern = "en/dev/"
 
     # iterate through the files in the /docs/ directory to make sure the are no links to the dev version of the documentation
@@ -161,3 +168,45 @@ def test_no_dev_links():
                     file_text = f.read()
                     assert dev_pattern not in file_text
                     print("check passed\n")
+
+
+def test_markdown_links():
+    """Make sure there are no links to the dev version of the docs."""
+    markdown_link_pattern = '\[.*?\]\(.+\)'
+    errors = 0
+
+    for path, dirs, files in os.walk(os.path.abspath(os.path.join(os.path.dirname(__file__), "../docs"))):
+        # ignore all directories that start with "_"
+        if "/_" not in path:
+            for file in files:
+                if not file.startswith('.'):
+                    # check to see if the dev pattern is in the file
+                    with open("{}/{}".format(path, file), 'r') as f:
+                        file_text = f.read()
+                        try:
+                            markdown_links = re.findall(markdown_link_pattern, file_text)
+                            assert markdown_links == []
+                        except AssertionError:
+                            print("Found what appears to be a markdown link in {}/{}: {}".format(path, file, markdown_links))
+                            errors += 1
+
+    assert errors == 0
+
+
+# def test_no_broken_headings():
+#     """Make sure there are no links to the dev version of the docs."""
+#     broken_heading_pattern = 'id="id[0-9]'
+
+#     for base_page, subpages in pages.items():
+#         for subpage in subpages:
+#             page = base_page + subpage
+
+#             # request page
+#             r = requests.get(page)
+
+#             try:
+#                 # check to see if there are any broken headings in the page
+#                 assert len(re.findall(broken_heading_pattern, r.text)) == 0
+#             except AssertionError as e:
+#                 print("\n\n>>> Reviewing {}".format(page))
+#                 raise e

@@ -39,6 +39,8 @@ This example demonstrates how to retrieve a specific Document using the Document
         # Document specific property
         print(document.file_name)
 
+        print('')
+
 Downloading a Document's Contents
 +++++++++++++++++++++++++++++++++
 
@@ -77,10 +79,10 @@ of **EXAMPLE**.
 
     owner = 'Example Community'
 
-    # set a filter to only retrieve Documents in the 'Example Community' tagged: 'APT'
+    # set a filter to only retrieve Documents in the 'Example Community' tagged: 'Nation State'
     filter1 = documents.add_filter()
     filter1.add_owner(owner)
-    filter1.add_tag('APT')
+    filter1.add_tag('Nation State')
 
     try:
         # retrieve the Documents
@@ -95,5 +97,6 @@ of **EXAMPLE**.
         print(document.date_added)
         print(document.owner_name)
         print(document.weblink)
+        print('')
 
 .. note:: The ``filter1`` object contains a ``filters`` property that provides a list of supported filters for the resource type being retrieved. To display this list, ``print(filter1.filters)`` can be used. For more on using filters see the `Advanced Filter Tutorial <https://docs.threatconnect.com/en/latest/python/advanced.html#advanced-filtering>`__.

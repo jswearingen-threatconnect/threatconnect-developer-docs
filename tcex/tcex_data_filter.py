@@ -1,12 +1,7 @@
-""" standard """
-# import json
+# -*- coding: utf-8 -*-
+""" Data Filter Module """
+from builtins import int, str
 import operator
-# import os
-# import types
-# import uuid
-
-""" third party """
-""" custom """
 
 
 class DataFilter(object):
@@ -31,12 +26,11 @@ class DataFilter(object):
         self._build_indexes()
 
     def _build_indexes(self):
-        """Build indexes from data for fast filtering of data
+        """Build indexes from data for fast filtering of data.
 
         Building indexes of data when possible.  This is only supported when dealing with a
         List of Dictionaries with String values.
         """
-
         if isinstance(self._data, list):
             for d in self._data:
                 if not isinstance(d, dict):
@@ -49,9 +43,9 @@ class DataFilter(object):
 
                 for key, value in d.items():
                     # bcs - update this
-                    # if not isinstance(value, (types.StringType, float, int, long)):
+                    # if not isinstance(value, (types.StringType, float, int)):
                     # TODO: This is not Python 3 ready
-                    if not isinstance(value, (float, int, long, str, unicode)):
+                    if not isinstance(value, (float, int, str)):
                         # For comparison operators the value needs to be a StringType
                         self._tcex.log.debug(u'Can only build index String Types.')
                         continue

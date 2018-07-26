@@ -98,23 +98,14 @@ passing an Integer for the number of retries.
 API Result Limit
 ----------------
 
-To change the default value, call the ``set_api_result_limit()`` method,
-passing an Integer between 1-500.
+The ThreatConnect API supports a **maximum of 10,000** results to be returned per API call during pagination. The Python SDK is configured for a **default of 200** results per API request. To change the default value, call the ``set_api_result_limit()`` method, passing an Integer between 1 and 10,000. The higher the number, the less API calls will be made, but in some cases, a lower number is required due to network limitations.
 
 .. 
     no-test
 
 .. code-block:: python
 
-    tc.set_api_result_limit(500)
-
-The ThreatConnect API supports a **maximum of 500** results to be
-returned per API call during pagination. The Python SDK is configured
-for a **default of 200** results per API request. To change the default
-value, call the ``set_api_result_limit()`` method, passing an Integer
-between 1-500. The higher the number, the less API calls will be made,
-but in some cases, a lower number is required due to network
-limitations.
+    tc.set_api_result_limit(10,000)
 
 Proxies
 -------
@@ -159,7 +150,7 @@ A list of Filters can also be retrieved by using the ``filter1.filters`` propert
 
     filter1 = adversary.add_filter()
     filter1.add_owner(owner)
-    filter1.add_tag('APT')
+    filter1.add_tag('Nation State')
 
     print(filter1)
 
@@ -179,53 +170,53 @@ using the ``filter1.filters`` property.
 
 filter1.filters Resulting Output
 
-+-----------------------+--------------------------+
-| Filter Object         |                          |
-+=======================+==========================+
-| **Filter Properties** |                          |
-+-----------------------+--------------------------+
-| Operator              | FilterSetOperator.AND    |
-+-----------------------+--------------------------+
-| Request Objects       | 1                        |
-+-----------------------+--------------------------+
-| **Owners**            |                          |
-+-----------------------+--------------------------+
-| Owner                 | Example Community        |
-+-----------------------+--------------------------+
-| **Filters**           |                          |
-+-----------------------+--------------------------+
-| Filter                | api filter by tag "APT"  |
-+-----------------------+--------------------------+
-| **API Filters**       |                          |
-+-----------------------+--------------------------+
-| Filter                | ``add\_adversary\_id``   |
-+-----------------------+--------------------------+
-| Filter                | ``add\_email\_id``       |
-+-----------------------+--------------------------+
-| Filter                | ``add\_document\_id``    |
-+-----------------------+--------------------------+
-| Filter                | ``add\_id``              |
-+-----------------------+--------------------------+
-| Filter                | ``add\_incident\_id``    |
-+-----------------------+--------------------------+
-| Filter                | ``add\_indicator``       |
-+-----------------------+--------------------------+
-| Filter                | ``add\_security\_label`` |
-+-----------------------+--------------------------+
-| Filter                | ``add\_signature\_id``   |
-+-----------------------+--------------------------+
-| Filter                | ``add\_threat\_id``      |
-+-----------------------+--------------------------+
-| Filter                | ``add\_tag``             |
-+-----------------------+--------------------------+
-| Filter                | ``add\_victim\_id``      |
-+-----------------------+--------------------------+
-| **Post Filters**      |                          |
-+-----------------------+--------------------------+
-| Filter                | ``add\_pf\_name``        |
-+-----------------------+--------------------------+
-| Filter                | ``add\_pf\_date\_added`` |
-+-----------------------+--------------------------+
++-----------------------+----------------------------------+
+| Filter Object         |                                  |
++=======================+==================================+
+| **Filter Properties** |                                  |
++-----------------------+----------------------------------+
+| Operator              | FilterSetOperator.AND            |
++-----------------------+----------------------------------+
+| Request Objects       | 1                                |
++-----------------------+----------------------------------+
+| **Owners**            |                                  |
++-----------------------+----------------------------------+
+| Owner                 | Example Community                |
++-----------------------+----------------------------------+
+| **Filters**           |                                  |
++-----------------------+----------------------------------+
+| Filter                | api filter by tag "Nation State" |
++-----------------------+----------------------------------+
+| **API Filters**       |                                  |
++-----------------------+----------------------------------+
+| Filter                | ``add\_adversary\_id``           |
++-----------------------+----------------------------------+
+| Filter                | ``add\_email\_id``               |
++-----------------------+----------------------------------+
+| Filter                | ``add\_document\_id``            |
++-----------------------+----------------------------------+
+| Filter                | ``add\_id``                      |
++-----------------------+----------------------------------+
+| Filter                | ``add\_incident\_id``            |
++-----------------------+----------------------------------+
+| Filter                | ``add\_indicator``               |
++-----------------------+----------------------------------+
+| Filter                | ``add\_security\_label``         |
++-----------------------+----------------------------------+
+| Filter                | ``add\_signature\_id``           |
++-----------------------+----------------------------------+
+| Filter                | ``add\_threat\_id``              |
++-----------------------+----------------------------------+
+| Filter                | ``add\_tag``                     |
++-----------------------+----------------------------------+
+| Filter                | ``add\_victim\_id``              |
++-----------------------+----------------------------------+
+| **Post Filters**      |                                  |
++-----------------------+----------------------------------+
+| Filter                | ``add\_pf\_name``                |
++-----------------------+----------------------------------+
+| Filter                | ``add\_pf\_date\_added``         |
++-----------------------+----------------------------------+
 
 Filter Object Basics
 ^^^^^^^^^^^^^^^^^^^^
@@ -240,7 +231,7 @@ Python SDK Filter Object Basics example:
     filter1 = adversary.add_filter()
     filter1.add_indicator('10.20.30.40')
     filter1.add_victim_id(10)
-    filter1.add_tag('APT')
+    filter1.add_tag('Nation State')
 
 Python SDK Post Filter Basics example:
 
@@ -258,7 +249,7 @@ Python SDK Post Filter Basics example:
 As mentioned above, an API Filter will join the results. In the example,
 the API results will contain any Adversary that has an Association with
 the Indicator *10.20.30.40*, **OR** an Association with the Victim with
-an ID of *10*, **OR** has the Tag of *APT*.
+an ID of *10*, **OR** has the Tag of *Nation State*.
 
 As mentioned above, the Post Filters will intersect the results. In the
 example, the API results will only contain Adversaries that have the
@@ -594,7 +585,7 @@ Python SDK CEF Code Sample:
     try:
         filter1 = indicators.add_filter()
         filter1.add_owner(owner)
-        filter1.add_tag('APT')
+        filter1.add_tag('Nation State')
     except AttributeError as e:
         print(e)
         sys.exit(1)
@@ -609,6 +600,7 @@ Python SDK CEF Code Sample:
     # iterate through the Indicators
     for indicator in indicators:
         print(indicator.cef)
+        print('')
 
 Python SDK Sample CEF Output:
 
@@ -642,7 +634,7 @@ Python SDK CSV Code Sample:
     try:
         filter1 = indicators.add_filter()
         filter1.add_owner(owner)
-        filter1.add_tag('APT')
+        filter1.add_tag('Nation State')
     except AttributeError as e:
         print(e)
         sys.exit(1)
@@ -657,7 +649,7 @@ Python SDK CSV Code Sample:
     for indicator in indicators:
         print(indicator.csv_header)
         print(indicator.csv)
-        print("\n")
+        print('')
 
 Python SDK Sample CSV Output:
 
@@ -693,7 +685,7 @@ Python SDK JSON Code Sample:
     try:
         filter1 = indicators.add_filter()
         filter1.add_owner(owner)
-        filter1.add_tag('APT')
+        filter1.add_tag('Nation State')
     except AttributeError as e:
         print(e)
         sys.exit(1)
@@ -708,6 +700,7 @@ Python SDK JSON Code Sample:
     # iterate through the Indicators
     for indicator in indicators:
         print(indicator.json)
+        print('')
 
 Python SDK Sample JSON Output:
 
@@ -754,7 +747,7 @@ Python SDK Key Value Code Sample:
     try:
         filter1 = indicators.add_filter()
         filter1.add_owner(owner)
-        filter1.add_tag('APT')
+        filter1.add_tag('Nation State')
     except AttributeError as e:
         print(e)
         sys.exit(1)
@@ -804,7 +797,7 @@ Python SDK LEEF Code Sample:
     try:
         filter1 = indicators.add_filter()
         filter1.add_owner(owner)
-        filter1.add_tag('APT')
+        filter1.add_tag('Nation State')
     except AttributeError as e:
         print(e)
         sys.exit(1)
@@ -819,6 +812,7 @@ Python SDK LEEF Code Sample:
     # iterate through the Indicators
     for indicator in indicators:
         print(indicator.leef)
+        print('')
 
 Python SDK Sample LEEF Output:
 
@@ -954,7 +948,7 @@ script results:
 
     filter1 = indicators.add_filter()
     filter1.add_owner(owner)
-    filter1.add_tag('APT')
+    filter1.add_tag('Nation State')
 
     try:
         # retrieve the Indicators
@@ -1026,6 +1020,7 @@ Python SDK failed reports example:
     # iterate through the failures
     for fail in tc.report.failures:
         print(fail)
+        print('')
 
 Sample Failed-Report Output:
 
@@ -1089,3 +1084,58 @@ All report entries can be accessed via the Report generator. By
 iterating over ``tc.report``, each individual report entry will be
 returned. These report entries can be printed and the individual
 properties can be accessed.
+
+Gotchas
+-------
+
+This section details some things to be aware of when using the Python SDK for advanced use-cases.
+
+Order is Important when Adding Attributes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you are adding attributes to an indicator using this SDK, the order in which the attributes are added can be important. This is true if one of the attributes may be improperly formatted, thus causing an API error.
+
+To illustrate this, consider the following code:
+
+.. 
+    no-test
+
+.. code-block:: python
+
+    # replace the line below with the standard, TC script heading described here:
+    # https://docs.threatconnect.com/en/latest/python/quick_start.html#standard-script-heading
+    ...
+
+    tc = ThreatConnect(api_access_id, api_secret_key, api_default_org, api_base_url)
+
+    # instantiate Indicators object
+    indicators = tc.indicators()
+
+    owner = 'Example Community'
+
+    # create a new file indicator
+    indicator = indicators.add('a'*32, owner)
+
+    # add a Description attribute
+    indicator.add_attribute('Description', 'Test description')
+
+    # add an ssdeep Hash attribute
+    indicator.add_attribute('ssdeep Hash', '!!MALFORMED SSDEEP HASH!!')
+
+    # add a Source attribute
+    indicator.add_attribute('Source', 'Test source')
+
+    # set the confidence rating for the indicator
+    indicator.set_confidence(75)
+
+    indicator.commit()
+
+We want to create a File Indicator, add three attributes (description, ssdeep hash, and source), and set the confidence rating. When ``indicator.commit()`` is called, it will follow these steps (the important sections are in bold):
+
+- Create the indicator
+- Add a description attribute
+- **Fail while trying to add the ssdeep Hash attribute**
+- **Will not add a source attribute**
+- Set the confidence rating
+
+The key point is that any attributes created *after* the creation of another attribute has failed will not be created. Thus, if you have an attribute that may be invalid, you should add other attributes first. Other operations like setting the confidence and threat ratings and adding tags will work properly after the creation of an attribute has failed.

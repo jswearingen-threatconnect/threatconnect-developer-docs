@@ -1,7 +1,7 @@
 Retrieve Group Security Labels
 """"""""""""""""""""""""""""""
 
-The code snippet below demonstrates how to retrieve the security label from an Incident. This example assumes there is an Incident with an ID of ``123456``. To test this code snippet, change the ``incident_id`` variable to the ID of an incident in your owner. This same process also applies to all group types. Simply change ``tc.incidents()`` to the group type you would like to retrieve. The available group types are: ``tc.<adversaries|campaigns|documents|emails|incidents|signatures|threats>()``. This snippet also assumes that the target owner has a 'TLP Green' security label (security labels are not case sensitive when using the Python SDK).
+The code snippet below demonstrates how to retrieve the security label from an Incident. This example assumes there is an Incident with an ID of ``123456``. To test this code snippet, change the ``incident_id`` variable to the ID of an incident in your owner. This same process also applies to all group types. Simply change ``tc.incidents()`` to the group type you would like to retrieve. The available group types are: ``tc.<adversaries|campaigns|documents|emails|incidents|signatures|threats>()``.
 
 .. code-block:: python
     :emphasize-lines: 28-29
@@ -41,5 +41,6 @@ The code snippet below demonstrates how to retrieve the security label from an I
             print(incident.security_label.name)
             print(incident.security_label.description)
             print(incident.security_label.date_added)
+            print('')
 
 .. warning:: Currently, the ThreatConnect Python SDK does not support multiple security labels. If a Group has multiple security labels, the Python SDK will only return one of them.

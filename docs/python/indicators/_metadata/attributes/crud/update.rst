@@ -38,10 +38,12 @@ The code snippet below demonstrates how to update an Indicator's attribute. This
             print(attribute.id)
 
             # if the current attribute is a description attribute, update the value of the description
-            if attribute.type == "Description":
+            if attribute.type == 'Description':
                 indicator.update_attribute(attribute.id, 'Updated Description')
 
         # commit the changes
         indicator.commit()
 
 .. note:: In the prior example, no API calls are made until the ``commit()`` method is invoked.
+
+.. hint:: The order in which you update attributes can be important. See `'Order is Important when Adding Attributes' <https://docs.threatconnect.com/en/latest/python/advanced.html#order-is-important-when-adding-attributes>`_ for more details.

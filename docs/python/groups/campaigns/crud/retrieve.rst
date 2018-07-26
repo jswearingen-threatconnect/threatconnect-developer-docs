@@ -35,11 +35,12 @@ This example demonstrates how to retrieve a specific Campaign using the Campaign
         print(campaign.name)
         print(campaign.date_added)
         print(campaign.weblink)
+        print('')
 
 Retrieving Multiple Campaigns
 """""""""""""""""""""""""""""
 
-This example demonstrates how to retrieve Campaigns while applying filters. Two filters are added: one for the Owner and another for a Tag. The result set returned from this example will contain all Campaigns in the "Example Community" Owner that have the **APT** Tag.
+This example demonstrates how to retrieve Campaigns while applying filters. Two filters are added: one for the Owner and another for a Tag. The result set returned from this example will contain all Campaigns in the "Example Community" Owner that have the **Nation State** Tag.
 
 .. code-block:: python
     :emphasize-lines: 12-15,18-19
@@ -55,10 +56,10 @@ This example demonstrates how to retrieve Campaigns while applying filters. Two 
 
     owner = 'Example Community'
 
-    # set a filter to only retrieve Campaigns in the 'Example Community' tagged: 'APT'
+    # set a filter to only retrieve Campaigns in the 'Example Community' tagged: 'Nation State'
     filter1 = campaigns.add_filter()
     filter1.add_owner(owner)
-    filter1.add_tag('APT')
+    filter1.add_tag('Nation State')
 
     try:
         # retrieve the Campaigns
@@ -73,5 +74,6 @@ This example demonstrates how to retrieve Campaigns while applying filters. Two 
         print(campaign.name)
         print(campaign.date_added)
         print(campaign.weblink)
+        print('')
 
 .. note:: The ``filter1`` object contains a ``filters`` property that provides a list of supported filters for the resource type being retrieved. To display this list, ``print(filter1.filters)`` can be used. For more on using filters see the `Advanced Filter Tutorial <https://docs.threatconnect.com/en/latest/python/advanced.html#advanced-filtering>`__.

@@ -39,6 +39,8 @@ This example demonstrates how to retrieve a specific Incident using the Incident
         # Incident specific property
         print(incident.event_date)
 
+        print('')
+
 Retrieving Multiple Incidents
 """""""""""""""""""""""""""""
 
@@ -62,10 +64,10 @@ of **EXAMPLE**.
 
     owner = 'Example Community'
 
-    # set a filter to only retrieve Incidents in the 'Example Community' tagged: 'APT'
+    # set a filter to only retrieve Incidents in the 'Example Community' tagged: 'Nation State'
     filter1 = incidents.add_filter()
     filter1.add_owner(owner)
-    filter1.add_tag('APT')
+    filter1.add_tag('Nation State')
 
     try:
         # retrieve the Incidents
@@ -82,5 +84,7 @@ of **EXAMPLE**.
 
         # Incident specific property
         print(incident.event_date)
+
+        print('')
 
 .. note:: The ``filter1`` object contains a ``filters`` property that provides a list of supported filters for the resource type being retrieved. To display this list, ``print(filter1.filters)`` can be used. For more on using filters see the `Advanced Filter Tutorial <https://docs.threatconnect.com/en/latest/python/advanced.html#advanced-filtering>`__.

@@ -38,20 +38,21 @@ The example below demonstrates how to retrieve a specific Victim Resource from t
         assert len(victims) == 1
     except AssertionError as e:
         # if the Victim doesn't exist in the given owner, raise an error
-        print("AssertionError: The victim with ID {0} was not found in the '{1}' owner. ".format(victim_id, owner) +
-              "Try changing the `owner` variable to the name of an owner in your instance of ThreatConnect " +
-              "and/or set the `victim_id` variable to the ID of a Victim that exists in the given owner.")
+        print('AssertionError: The victim with ID {0} was not found in the "{1}" owner. '.format(victim_id, owner) +
+              'Try changing the `owner` variable to the name of an owner in your instance of ThreatConnect ' +
+              'and/or set the `victim_id` variable to the ID of a Victim that exists in the given owner.')
         sys.exit(1)
 
     # if the Victim was found, print some information about it
     for victim in victims:
-        print(obj.id)
-        print(obj.name)
-        print(obj.nationality)
-        print(obj.org)
-        print(obj.suborg)
-        print(obj.work_location)
-        print(obj.weblink)
+        print(victim.id)
+        print(victim.name)
+        print(victim.nationality)
+        print(victim.org)
+        print(victim.suborg)
+        print(victim.work_location)
+        print(victim.weblink)
+        print('')
 
 .. note:: If you get an ``AssertionError`` when running this code, you likely need to change the name of the ``owner`` variable so that it is the name of an owner in your instance of ThreatConnect and/or you need to change the ``victim_id`` variable so that it is the ID of a Victim that exists in the given owner.
 
@@ -90,10 +91,11 @@ The example below demonstrates how to retrieve multiple Victim Resources from th
 
     # iterate through the retrieved Victims and print their properties
     for victim in victims:
-        print(obj.id)
-        print(obj.name)
-        print(obj.nationality)
-        print(obj.org)
-        print(obj.suborg)
-        print(obj.work_location)
-        print(obj.weblink)
+        print(victim.id)
+        print(victim.name)
+        print(victim.nationality)
+        print(victim.org)
+        print(victim.suborg)
+        print(victim.work_location)
+        print(victim.weblink)
+        print('')

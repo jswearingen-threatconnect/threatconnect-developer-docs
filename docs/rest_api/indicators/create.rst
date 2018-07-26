@@ -70,6 +70,8 @@ The table below illustrates valid fields for the body of the POST request when c
 
 \*Files are required to be submitted with at least one valid hash.
 
+.. hint:: If you are unable to create an Indicator, check out some `Common Indicator Creation Errors <https://docs.threatconnect.com/en/latest/common_errors.html#creating-indicators>`__.
+
 Create Address Indicators
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -543,6 +545,8 @@ JSON Response:
       "status": "Success"
     }
 
+.. include:: ../_includes/tag_length.rst
+
 Creating File Occurrences
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -635,25 +639,7 @@ JSON Response:
 Associate Indicator to Indicator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To associate an Indicator with another Indicator, use a query in the following format:
-
-.. code::
-
-    POST /v2/indicators/{indicatorType}/{indicator}/indicators/{associatedIndicatorType}/{associatedIndicator}
-
-For example, the query below will associate the Email Address ``bad@example.com`` with the IP Address ``0.0.0.0``:
-
-.. code::
-
-    POST /v2/indicators/emailAddresses/bad@example.com/indicators/addresses/0.0.0.0
-
-JSON Response:
-
-.. code:: json
-
-    {
-      "status": "Success"
-    }
+The documentation for creating and retrieving Indicator-to-Indicator relationships has been moved `here <#indicator-to-indicator-associations>`_.
 
 Associate Victim to Indicator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

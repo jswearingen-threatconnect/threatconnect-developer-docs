@@ -1,7 +1,7 @@
 Custom Metrics
 ==============
 
-As of ThreatConnect 5.4, it is possible to create Custom Metrics which can be used to monitor and track important data points. This documentation will detail how to retrieve, create, and delete Custom Metrics via the API.
+As of ThreatConnect 5.4, it is possible to create Custom Metrics which can be used to monitor and track important data points. A card for Custom Metrics can be created on the `ThreatConnect dashboard <http://kb.threatconnect.com/customer/en/portal/articles/2092053-dashboard>`_ to show the value(s) of a Metric. This documentation will detail how to retrieve, create, and delete Custom Metrics via the API.
 
 Retrieving Custom Metrics
 -------------------------
@@ -108,6 +108,8 @@ The following values are the available values for the ``interval`` field in the 
 Creating Content in a Custom Metric
 -----------------------------------
 
+.. note:: When passing a "date" field into a request, use a timestamp in `ISO format <https://en.wikipedia.org/wiki/ISO_8601>`__ (e.g. ``2018-10-19T14:44:00Z``).
+
 Creating Content in a Keyed Metric
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -153,7 +155,8 @@ For example, the query below will add two to the count of a ``tasksCompleted`` m
 
     POST /v2/customMetrics/tasksCompleted/data
     {
-      "value": "2"
+      "value": "2",
+      "date": "2018-01-19T14:44:00Z"
     }
 
 Custom Metrics Return Value

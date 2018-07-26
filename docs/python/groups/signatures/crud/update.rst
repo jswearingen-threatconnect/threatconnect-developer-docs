@@ -20,10 +20,15 @@ ThreatConnect platform:
 
     # create a Signature with an updated name
     signature = signatures.add('Updated Signature', owner)
+
+    # even if you are not updating these values, you need to set them
+    signature.set_file_name('updated.sig')
+    signature.set_file_type('Yara')
+
     # set the ID of the new Signature to the ID of the existing Signature you want to update
     signature.set_id(123456)
 
-    # you can update the Signature metadata as described here: https://docs.threatconnect.com/en/latest/python/python_sdk.html#group-metadata
+    # you can update the Signature metadata as described here: https://docs.threatconnect.com/en/latest/python/groups/groups.html#group-metadata
 
     try:
         # update the Signature
