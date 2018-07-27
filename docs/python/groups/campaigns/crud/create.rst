@@ -45,4 +45,3 @@ The example below demonstrates how to create a Campaign Resource in the ThreatCo
 +===============+==================+==========+
 | first\_seen   | set\_first\_seen | False    |
 +---------------+------------------+----------+
-

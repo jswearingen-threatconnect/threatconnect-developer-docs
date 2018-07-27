@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from recommonmark.parser import CommonMarkParser
+from recommonmark.transform import AutoStructify
 
 from tcex import __version__
 
@@ -40,10 +41,10 @@ rst_epilog = """
 viewcode_import = True
 
 templates_path = ['/home/docs/checkouts/readthedocs.org/readthedocs/templates/sphinx', 'templates', '_templates', '.templates']
-source_suffix = ['.rst', '.md']
 source_parsers = {
-            '.md': CommonMarkParser,
-        }
+    '.md': CommonMarkParser,
+}
+source_suffix = ['.rst', '.md']
 master_doc = 'index'
 project = u'ThreatConnect Developer Docs'
 copyright = u'2017, ThreatConnect Inc'
@@ -80,3 +81,9 @@ html_favicon = '_static/favicon.ico'
 def setup(app):
     """Add the stylesheet which fixes the problems with the problem with line numbers."""
     app.add_stylesheet('css/custom.css')
+    # add the ability to evaluate RST (which is used to highlight line numbers in the code)
+    app.add_config_value('recommonmark_config', {
+        'enable_eval_rst': True,
+        'enable_auto_toc_tree': True
+    }, True)
+    app.add_transform(AutoStructify)
