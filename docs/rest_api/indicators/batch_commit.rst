@@ -174,7 +174,10 @@ Generally speaking, the list of fields expected within each Indicator or Group i
 
     HTTP/1.1 201 Created
     {
-      batchId: "123"
+    	"status":"Success",
+	"data":{
+		"batchId":1246810150
+		}
     }
 
 **Server Response on Insufficient Privileges**
